@@ -1,4 +1,10 @@
-# Artalk
+# 💬 Artalk
+
+:::warning
+Dieses Image nutze ich nicht mehr, da ich nun [Outline](./Outline.md) als Wiki verwende.
+
+:::
+
 
 [Artalk](https://artalk.js.org), eine in GO geschriebene Anwendung, dient dazu eine Kommentarfunktion in WebApps einzubinden und zu verwalten. Das kann entweder durch eine native Integration wie bei [Wiki.js](/Apps-Server/wikijs) oder manuell ober die Artalk API erfolgen. Artalk ist Open-Source und lässt sich, wie im Beispiel hier, in einem Docker Container auf einem Server betreiben.
 

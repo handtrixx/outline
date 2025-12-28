@@ -1,6 +1,11 @@
 # 🔑 2FAuth
 
-![](uploads/6cc33526-867e-42e8-9bcd-6c11598a0e64/9447b5c1-db38-4aaa-8140-aefa322365d8/2fauth_screenshots_dark.png " =1513x640")
+:::warning
+Dieses Image verwende ich nicht mehr, stattdessen nutze ich die in Bitwarden integrierte OTP Funktionalität
+
+:::
+
+ ![](uploads/6cc33526-867e-42e8-9bcd-6c11598a0e64/9447b5c1-db38-4aaa-8140-aefa322365d8/2fauth_screenshots_dark.png " =1513x640")
 
 
 2Fauth ist ein One Time Password (OTP) Generator und ersetzt Client-seitige 2-Faktor Authentifizierungs Applikationen. Es lässt sich zusätzlich als Browser Add-On und auch als PWA installieren.

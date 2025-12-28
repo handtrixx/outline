@@ -9,7 +9,6 @@ Heute beschreibe ich was ein Reverse Proxy ist und warum er in deiner Docker Lan
 # compose.yml File
 
 ```yaml
-
 services:
   caddy:
     container_name: caddy
@@ -33,7 +32,14 @@ networks:
 
 # Kommandos
 
-\n#To reload Caddy after making changes to your Caddyfile: #docker exec -w /etc/caddy caddy caddy fmt --overwrite #docker exec -w /etc/caddy caddy caddy reload #docker exec -w /etc/caddy caddy caddy hash-password -p password
+\nTo reload Caddy after making changes to your Caddyfile: 
+
+
+```javascript
+docker exec -w /etc/caddy caddy caddy fmt --overwrite
+docker exec -w /etc/caddy caddy caddy reload
+docker exec -w /etc/caddy caddy caddy hash-password -p password
+```
 
 
 ## Warum ein Reverse Proxy für Docker Container?
@@ -83,8 +89,7 @@ Bei Problemen hilft auch ein Blick in die Caddy Community, die viele Problembeha
 Falls ihr Änderungen/Ergänzungen an dem Caddyfile vornehmt müsst ihr nicht jedes Mal den kompletten Container durchstarten und könnt so Dowtimes durch folgenden Befehl, der die Konfiguration live neu läd, aktualisieren:
 
 ```bash
-
-docker compose exec -w /etc/caddy caddy caddy reload
+docker exec -w /etc/caddy caddy caddy reload
 ```
 
 
