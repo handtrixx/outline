@@ -1,4 +1,4 @@
-# Caddy Reverse Proxy
+# Caddy
 
 Heute beschreibe ich was ein Reverse Proxy ist und warum er in deiner Docker Landschaft nicht fehlen darf. Nachdem ich mehrere Jahre lang sowohl Traefik, als auch den Nginx Proxy Manager als Reverse Proxy für meine Docker Container genutzt habe, bin ich nun bei Caddy gelandet. Am Nginx Proxy Manager störte mich, dass zur Konfiguration ausschließlich die Web UI zur Verfügung steht. Das hat mich in Backup/Restore Szenarien öfter an die Grenzen gebracht, was zum Schluss dazu führte jedes Mal aufs neue eine Klickorgie zu veranstalten. An Traefik störte mich wiederum die aufgeblähte Konfiguration, sowie die vielen Labels die an jedem zu berücksichtigenden Container ergänzt werden müssen. Caddy bietet mit einer CLI und einer API, die gewünschte Flexibilität und lässt sich auch einfach sichern/wiederherstellen.
 
