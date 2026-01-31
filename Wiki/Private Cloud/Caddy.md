@@ -24,10 +24,14 @@ services:
       - ./caddy_config:/config
     networks:
       - caddy
-
 networks:
-    caddy:
-        external: true
+  caddy:
+    name: caddy
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.19.0.0/16
+          gateway: 172.19.0.1
 ```
 
 # Kommandos
@@ -93,4 +97,159 @@ docker exec -w /etc/caddy caddy caddy reload
 ```
 
 
-# Quellen
+# Caddyfile
+
+```json
+{
+	# TLS Options
+	email niklas.stephan@gmail.com
+}
+
+(wordpress) {
+	header {
+		Cache-Control "public, max-age=7200, must-revalidate"
+	}
+}
+
+(mail-backend) {
+	reverse_proxy 172.19.0.1:8085
+}
+
+(trusted_proxy_list) {
+	trusted_proxies 172.19.0.0/24
+}
+
+cloud.niklas-stephan.de {
+	reverse_proxy 172.19.0.1:9200
+}
+
+docs.niklas-stephan.de {
+	reverse_proxy docsniklas-stephande-outline-1:80
+}
+
+collabora.niklas-stephan.de {
+	reverse_proxy 172.19.0.1:9980
+}
+wopiserver.niklas-stephan.de {
+	reverse_proxy 172.19.0.1:9300
+}
+
+docker.handtrixxx.com {
+	reverse_proxy arcane:3552
+}
+
+node.handtrixxx.com {
+	reverse_proxy node:1880
+}
+
+ac-malchsee.de, www.ac-malchsee.de {
+	import wordpress
+	reverse_proxy malchsee-app:80
+}
+
+frau-eule.de, www.frau-eule.de {
+	import wordpress
+	reverse_proxy fraueulede-app:80
+}
+
+new.frau-eule.de {
+	import wordpress
+	reverse_proxy fraueule-app:80
+}
+
+handtrixxx.com, www.handtrixxx.com {
+	reverse_proxy handtrixxx:80
+}
+
+auth.handtrixxx.com {
+	reverse_proxy authentik-server:9000
+}
+
+home.handtrixxx.com {
+	reverse_proxy wg-easy:8123
+}
+
+music.handtrixxx.com {
+	reverse_proxy wg-easy:8095
+}
+
+keys.handtrixxx.com {
+	reverse_proxy vaultwarden:80
+}
+
+dav.handtrixxx.com {
+	reverse_proxy radicale:5232
+}
+
+mail.handtrixxx.com,
+mail.niklas-stephan.de,
+mail.quickscot.de,
+mail.quicksilvers.de,
+mail.ac-malchsee.de,
+mail.frau-eule.de {
+	import mail-backend
+}
+
+autodiscover.mail.handtrixxx.com,
+autoconfig.mail.handtrixxx.com,
+autodiscover.handtrixxx.com,
+autoconfig.handtrixxx.com {
+	import mail-backend
+}
+
+webmail.handtrixxx.com {
+	reverse_proxy roundcube:80
+}
+
+stalwart.handtrixxx.com {
+	reverse_proxy stalwart:8080
+}
+
+photos.handtrixxx.com {
+	reverse_proxy immich-server:2283
+}
+
+search.handtrixxx.com {
+	reverse_proxy search-searxng:8080
+}
+
+start.handtrixxx.com {
+	reverse_proxy heimdall:80
+}
+
+desktop.handtrixxx.com {
+	reverse_proxy webtop:3000
+}
+
+vpn.handtrixxx.com {
+	reverse_proxy wg-easy:51821
+}
+
+niklas-stephan.de, www.niklas-stephan.de {
+	reverse_proxy app:3000
+}
+
+quickscot.de, www.quickscot.de, quicksilvers.de, www.quicksilvers.de {
+	import wordpress
+	reverse_proxy quickscot-static:80
+}
+
+stats.niklas-stephan.de, stats.ac-malchsee.de, stats.frau-eule.de, stats.handtrixxx.com, stats.quickscot.de {
+	reverse_proxy matomo-web:80 {
+		header_up X-Real-IP {remote_host}
+		import trusted_proxy_list
+	}
+}
+
+cdfox.bbraun.io {
+	handle_path /ext/drawio/* {
+		@index_html path /ext/drawio/index.html
+		handle @index_html {
+			respond @unauthorized 401
+		}
+		reverse_proxy drawio:80
+	}
+	reverse_proxy cdfox:3000
+}
+
+```
