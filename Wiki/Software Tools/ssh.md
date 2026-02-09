@@ -17,3 +17,11 @@ Host NAME_USED_FOR_OPENING_CONNECTION
 
 ...
 ```
+
+to enable passwordless login
+
+```bash
+ssh-keygen # if not done before
+
+ssh-copy-id -p 2222 USER@IP
+```
